@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { peopleFromServer } from './data/people';
 import { PersonList } from './components/PersonList/PersonList';
+import { QueryPerson } from './components/QueryPerson/QueryPerson';
 
 export const App: React.FC = () => {
+  const [query, setQuery] = useState('');
+  const visiblePersons = peopleFromServer
+    .filter(pers => pers.name.toLowerCase().includes(query.toLowerCase()));
   const { name, born, died } = peopleFromServer[0];
 
   return (
@@ -13,14 +17,18 @@ export const App: React.FC = () => {
       </h1>
 
       <div className="dropdown is-active">
-        <div className="dropdown-trigger">
+        <QueryPerson
+          query={query}
+          setQuery={setQuery}
+        />
+        {/* <div className="dropdown-trigger">
           <input
             type="text"
             placeholder="Enter a part of the name"
             className="input"
           />
-        </div>
-        <PersonList persons={peopleFromServer} />
+        </div> */}
+        <PersonList persons={visiblePersons} />
         {/* <div className="dropdown-menu" role="menu">
           <div className="dropdown-content">
             <div className="dropdown-item">
