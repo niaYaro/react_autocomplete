@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { peopleFromServer } from './data/people';
+import { PersonList } from './components/PersonList/PersonList';
 
 export const App: React.FC = () => {
   const { name, born, died } = peopleFromServer[0];
@@ -19,8 +20,8 @@ export const App: React.FC = () => {
             className="input"
           />
         </div>
-
-        <div className="dropdown-menu" role="menu">
+        <PersonList persons={peopleFromServer} />
+        {/* <div className="dropdown-menu" role="menu">
           <div className="dropdown-content">
             <div className="dropdown-item">
               <p className="has-text-link">Pieter Haverbeke</p>
@@ -50,7 +51,7 @@ export const App: React.FC = () => {
               <p className="has-text-danger">Elisabeth Hercke</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
